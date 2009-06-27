@@ -14,6 +14,13 @@ Person.prototype.say = function(message) {
   // Say the message.
   // TODO: Replace this with the server POST.
   $('#chat-log').append(this.name + ': ' + message + '\n');
+  // $.Ajax({
+  //   type: 'POST',
+  //   url: '/path/to/post',
+  //   data: {name: name, message: message},
+  //   success: function() {},
+  //   error:   function() {},
+  // });
 }
 
 
