@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #eee;
+  font-family: Helvetica, "MS Trebuchet", sans-serif;
+  letter-spacing: -0.1em;
+  text-align: center;
+}
+
+h1 {
+  font-size: 5em;
+  text-align: left;
+}
+
+#wrapper {
+  border: 3px solid black;
+  margin: -1.3em 6.5em;
+  padding: 1em;
+  width: 600px;
+}
+
+#person {
+  text-align: right;
+}
+
+#person > input {
+  margin: 1em 0;
+}
+
+#chat-log {
+  height: 400px;
+  width: 100%;
+}
+
+#chat-input {
+  width: 50%;
+}
+
+input {
+  margin: 1em;
+  margin-bottom: 0.5em;
+}
