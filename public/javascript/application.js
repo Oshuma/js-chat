@@ -9,6 +9,12 @@ $(document).ready(function() {
 
   $('#refresh-chat').click(function() {
     new Server().poll();
+    // $.Ajax({
+    //   type: 'GET',
+    //   url: '/json',
+    //   success: function(response) { alert(response); },
+    //   error:   function(response) { alert(response); },
+    // });
     // return false;
   });
 }); // $(document).ready()

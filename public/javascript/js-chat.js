@@ -25,17 +25,18 @@ Person.prototype.say = function(message) {
 
 
 // Server contructor.
-function Server() {}
+function Server(interval) {
+  this.interval = (typeof(interval) == 'undefined' ? 10 : interval);
 
-// Polls the server for new messages.
-Server.prototype.poll = function() {
-  alert('yes');
-  /* if (typeof(interval) == 'undefined') interval = 10; */
-  // TODO: Here's the code that polls the server for new messages.
-  // $.Ajax({
-  //   type: 'GET',
-  //   url: '/messages.json',
-  //   success: function(response) { alert(response); },
-  //   error:   function(response) { alert(response); },
-  // });
+  // Polls the server for new messages.
+  this.poll = function() {
+    alert('Server is getting data.');
+    // TODO: Here's the code that polls the server for new messages.
+    // $.Ajax({
+    //   type: 'GET',
+    //   url: '/json',
+    //   success: function() {},
+    //   error:   function() {},
+    // });
+  };
 }
