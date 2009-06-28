@@ -29,5 +29,5 @@ function Server() {}
 
 // Polls the server for new messages.
 Server.prototype.poll = function(interval) {
-  if (typeof(interval) == undefined) interval = 15;
+  if (typeof(interval) == undefined) interval = 10;
 }
