@@ -9,9 +9,7 @@
       </div>
 
       <textarea id="chat-log" disabled>
-        <% @messages.each do |message| %>
-          <%= message.name %>: <%= message.body %>
-        <% end %>
+<%= @messages.map { |m| m.to_s }.join("\n") %>
       </textarea>
 
       <label for="chat-input">Say:</label>

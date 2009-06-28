@@ -26,13 +26,14 @@ Person.prototype.say = function(message) {
 
 // Server contructor.
 function Server(interval) {
+  // Default interval is 5 seconds (5000ms).
   this.interval = (typeof(interval) == 'undefined' ? 5000 : interval);
 
   // Polls the server for new messages.
   // This is meant to be attached to a timer.
   this.poll = function() {
     // TODO: Replace this with the code that polls the server for new messages.
-    $('#chat-log').append('Server polling for new messages...\n');
+    $('#chat-log').append('\nServer polling for new messages...\n');
     // $.Ajax({
     //   type: 'GET',
     //   url: '/json',
