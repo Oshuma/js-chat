@@ -39,16 +39,19 @@ configure do
   end
 end
 
+# Front end.
 get '/' do
   headers 'Content-Type' => 'text/html; charset=utf-8'
   @messages = Message.all
   erb :home
 end
 
+# Returns the messages in JSON format.
 get '/json' do
   Message.all.map { |m| m.to_json }.to_json
 end
 
+# Creates a new Message
 post '/messages' do
   Message.all << Message.new(params['message'])
   redirect '/'

@@ -16,8 +16,8 @@ Person.prototype.say = function(message) {
   $('#chat-log').append(this.name + ': ' + message + '\n');
   // $.Ajax({
   //   type: 'POST',
-  //   url: '/path/to/post',
-  //   data: {name: name, message: message},
+  //   url: '/messages',
+  //   data: {'name': name, 'message': message},
   //   success: function() {},
   //   error:   function() {},
   // });
@@ -26,12 +26,13 @@ Person.prototype.say = function(message) {
 
 // Server contructor.
 function Server(interval) {
-  this.interval = (typeof(interval) == 'undefined' ? 10 : interval);
+  this.interval = (typeof(interval) == 'undefined' ? 5000 : interval);
 
   // Polls the server for new messages.
+  // This is meant to be attached to a timer.
   this.poll = function() {
-    alert('Server is getting data.');
-    // TODO: Here's the code that polls the server for new messages.
+    // TODO: Replace this with the code that polls the server for new messages.
+    $('#chat-log').append('Server polling for new messages...\n');
     // $.Ajax({
     //   type: 'GET',
     //   url: '/json',
