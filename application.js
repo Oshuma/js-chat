@@ -6,4 +6,9 @@ $(document).ready(function() {
     new Person(name).say(message);
     return false;
   });
+
+  $('#refresh-chat').click(function() {
+    new Server().poll();
+    // return false;
+  });
 }); // $(document).ready()

@@ -28,6 +28,14 @@ Person.prototype.say = function(message) {
 function Server() {}
 
 // Polls the server for new messages.
-Server.prototype.poll = function(interval) {
-  if (typeof(interval) == undefined) interval = 10;
+Server.prototype.poll = function() {
+  alert('yes');
+  /* if (typeof(interval) == 'undefined') interval = 10; */
+  // TODO: Here's the code that polls the server for new messages.
+  // $.Ajax({
+  //   type: 'GET',
+  //   url: '/messages.json',
+  //   success: function(response) { alert(response); },
+  //   error:   function(response) { alert(response); },
+  // });
 }

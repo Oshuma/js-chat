@@ -2,6 +2,7 @@
 %w(
   rubygems
   sinatra
+  json
   haml
 ).each { |dependency| require dependency }
 
@@ -14,6 +15,14 @@ class Message
     @body = attrs['body'] || attrs[:body]
   end
 
+  def to_s
+    "[#{name}]: #{body}"
+  end
+
+  def to_json
+    "{ 'name': '#{name}', 'body': '#{body}' }"
+  end
+
   class << self
     def all
       @@messages ||= []
@@ -21,10 +30,21 @@ class Message
   end
 end
 
+configure do
+  3.times do |i|
+    attrs = { 'name' => "test-#{i}", 'body' => "content for #{i}" }
+    Message.all << Message.new(attrs)
+  end
+end
+
 get '/' do
   headers 'Content-Type' => 'text/html; charset=utf-8'
   @messages = Message.all
   haml :home
+end
+
+get '/json' do
+  Message.all.map { |m| m.to_json }.to_json
 end
 
 post '/messages' do
@@ -46,7 +66,11 @@ __END__
 @@ home
 %h1
   js-chat / chat-serv
+
 %div
+  #actions
+    %input{:id => 'refresh-chat', :type => 'submit', :value => 'Refresh'}
+
   - @messages.each do |message|
     %h3= message.name
     %p= message.body
