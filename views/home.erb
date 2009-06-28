@@ -1,0 +1,21 @@
+<h1>js-chat / chat-serve</h1>
+
+<div id="actions">
+  <form id="chat-form">
+    <div id="person">
+      <label for="person-name">Your Name:</label>
+      <input id="person-name" type="text" />
+    </div>
+    <textarea id="chat-log" disabled></textarea>
+    <label for="chat-input">Say:</label>
+    <input id="chat-input" type="text" />
+    <input id="chat-submit" type="submit" value="Send" />
+    <input id="chat-clear" type="reset" value="Clear" />
+    <input id="refresh-chat" type="submit" value="Refresh" />
+  </form>
+</div>
+
+<% @messages.each do |message| %>
+  <h3><%= message.name %></h3>
+  <p><%= message.body %></p>
+<% end %>

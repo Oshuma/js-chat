@@ -2,8 +2,8 @@
 %w(
   rubygems
   sinatra
+  erb
   json
-  haml
 ).each { |dependency| require dependency }
 
 # Basic example Message class.
@@ -31,6 +31,8 @@ class Message
 end
 
 configure do
+  set :public, File.dirname(__FILE__) + '/public'
+
   3.times do |i|
     attrs = { 'name' => "test-#{i}", 'body' => "content for #{i}" }
     Message.all << Message.new(attrs)
@@ -40,7 +42,7 @@ end
 get '/' do
   headers 'Content-Type' => 'text/html; charset=utf-8'
   @messages = Message.all
-  haml :home
+  erb :home
 end
 
 get '/json' do
@@ -51,26 +53,3 @@ post '/messages' do
   Message.all << Message.new(params['message'])
   redirect '/'
 end
-
-use_in_file_templates!
-
-__END__
-@@ layout
-%html
-  %head
-    %title js-chat / chat-serv
-
-  %body
-    = yield
-
-@@ home
-%h1
-  js-chat / chat-serv
-
-%div
-  #actions
-    %input{:id => 'refresh-chat', :type => 'submit', :value => 'Refresh'}
-
-  - @messages.each do |message|
-    %h3= message.name
-    %p= message.body
