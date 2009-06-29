@@ -28,8 +28,14 @@ Person.prototype.say = function(message) {
 
 /**
  * Holds the default Server options.
+ *
+ * @final
+ * @type Object
+ * @param {Boolean} initialPoll If true, the server is polled immediately when initializing.
+ * @param {Integer} interval The number of milliseconds in which to poll the server.
  */
 Server.defaults = {
+  initialPoll: false,
   interval: 5000,
 };
 
@@ -53,14 +59,13 @@ function Server(options) {
  * This should only be called once per Server instance.
  *
  * @member Server
- * @param {Boolean} initialPoll If true, the server is polled immediately when initializing.
  * @returns Server instance.
  * @type Server
  */
-Server.prototype.init = function( initialPoll ) {
+Server.prototype.init = function() {
   if (this.initialized) return;
 
-  if (initialPoll) this.poll();
+  if (this.options.initialPoll) this.poll();
   setInterval(this.poll, this.options.interval);
 
   this.initialized = true;
