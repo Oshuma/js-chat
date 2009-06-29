@@ -24,4 +24,12 @@ namespace :doc do
   task :clear do
     sh "rm -rf #{File.join(DOCROOT, 'api')}"
   end
+
+  desc 'Update the Github page with the README'
+  task :github do
+    sh "git checkout master"  # make sure we're on master
+    sh "cp #{File.join(DOCROOT, 'README.html')} #{ROOT}/gh-temp.html"
+    sh "git checkout gh-pages"
+    sh "mv gh-temp.html index.html"
+  end
 end
