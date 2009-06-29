@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>Oshuma/js-chat @ GitHub</title>
+
+    <style type="text/css">
+      body {
+        margin-top: 1.0em;
+        background-color: #eee;
+        font-family: "helvetica";
+        color: #000000;
+      }
+
+      #container {
+        margin: 0 auto;
+        width: 700px;
+      }
+
+      h1 {
+        font-size: 3.8em;
+        color: #111111;
+        margin-bottom: 3px;
+      }
+
+      h1 .small { font-size: 0.4em; }
+
+      h1 a {}
+
+      h2 { font-size: 1.5em; color: #111111; }
+
+      h3 { text-align: center; color: #111111; }
+
+      a {
+        color: #111111;
+        border-bottom: 2px dashed #777;
+        text-decoration: none;
+      }
+
+      a:hover {
+        border-bottom: 2px solid #777;
+      }
+
+      .description {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        margin-top: 30px;
+        font-style: italic;
+      }
+
+      .download {
+        float: right;
+      }
+
+      .download a {
+        border: none;
+      }
+
+      pre { background: #000; color: #fff; padding: 15px;}
+
+      hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+
+      .footer { text-align:center; padding-top:30px; font-style: italic; }
+    </style>
+  </head>
+
+  <body>
+    <a href="http://github.com/Oshuma/js-chat">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
+    </a>
+
+    <div id="container">
+
+      <div class="download">
+        <a href="http://github.com/Oshuma/js-chat/zipball/master">
+          <img border="0" width="90" src="http://github.com/images/modules/download/zip.png">
+        </a>
+        <a href="http://github.com/Oshuma/js-chat/tarball/master">
+          <img border="0" width="90" src="http://github.com/images/modules/download/tar.png">
+        </a>
+      </div>
+
+      <h1>
+        <a href="http://github.com/Oshuma/js-chat">js-chat</a>
+        <span class="small">by <a href="http://github.com/Oshuma">Oshuma</a></span>
+      </h1>
+
+      <div class="description">
+        Simple Javascript chat type dealy.
+      </div>
+
+      <h2>Dependencies</h2>
+      <p>
+        HTML & Javascript
+        (The examples use <a href="http://jquery.com/">jQuery</a>, but it's not a requirement).
+      </p>
+
+      <h2>Install</h2>
+      <p>
+        Include <code>js-chat.js</code> in your layout, then take a look at the examples.
+      </p>
+
+      <h2>Examples</h2>
+      <p>
+        One attempt of the examples is to provide a global <code>server</code>
+        instance, which communicates with whatever means you're using to store the chat messages.
+        Code examples can be found in the <code>examples/</code> directory.
+      </p>
+
+      <p>
+        <h3>Plain HTML</h3>
+        <p>Throw this in <code>&lt;head&gt;</code></p>
+<pre>
+&lt;head&gt;
+  &lt;script type="text/javascript"&gt;
+    var server = new Server().init();
+  &lt;/script&gt;
+&lt;/head&gt;
+</pre>
+
+        <h3>jQuery</h3>
+        <p>Include this in the <code>.ready()</code> method somewhere in your Javascript.</p>
+<pre>
+$(document).ready(function() {
+  var server = new Server().init();
+  // ...other jQuery shit...
+});
+</pre>
+
+      </p>
+
+      <h2>Authors</h2>
+      <p>
+        Dale Campbell (oshuma@gmail.com)
+      </p>
+
+      <h2>Download</h2>
+      <p>
+        You can download this project in either
+        <a href="http://github.com/Oshuma/js-chat/zipball/master">zip</a> or
+        <a href="http://github.com/Oshuma/js-chat/tarball/master">tar</a> formats.
+      </p>
+
+      <p>
+        You can also clone the project with <a href="http://git-scm.com">Git</a>
+        by running:
+        <pre>$ git clone git://github.com/Oshuma/js-chat</pre>
+      </p>
+
+      <div class="footer">
+        get open sores at GitHub : <a href="http://github.com/Oshuma/js-chat">Oshuma/js-chat</a>
+      </div>
+
+    </div>
+  </body>
+</html>
