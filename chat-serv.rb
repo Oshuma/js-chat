@@ -16,7 +16,7 @@ class Message
   end
 
   def to_s
-    "[#{name}]: #{body}"
+    "#{name}: #{body}"
   end
 
   def to_json

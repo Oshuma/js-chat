@@ -8,16 +8,15 @@
         <input id="person-name" type="text" />
       </div>
 
-      <textarea id="chat-log" disabled>
-<%= @messages.map { |m| m.to_s }.join("\n") %>
-      </textarea>
+      <textarea id="chat-log" disabled><%= @messages.map { |m| m.to_s }.join("\n") %>
+</textarea>
 
       <label for="chat-input">Say:</label>
       <input id="chat-input" type="text" />
 
-      <input id="chat-submit" type="submit" value="Send" />
-      <input id="chat-clear" type="reset" value="Clear" />
-      <input id="refresh-chat" type="submit" value="Refresh" />
+      <input id="chat-submit" type="submit" value="Send" onclick="; return false;" />
+      <input id="chat-clear" type="reset" value="Clear" onclick="; return false;" />
+      <input id="refresh-chat" type="submit" value="Refresh" onclick="; return false;" />
     </form>
   </div>
 </div>

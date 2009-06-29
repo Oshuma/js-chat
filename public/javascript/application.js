@@ -1,17 +1,23 @@
 // The UI shit.
 $(document).ready(function() {
-  // Create the server and setup the polling interval.
-  var server = new Server();
-  setInterval(server.poll, server.interval);
+  // Create and initialize the server.
+  var server = new Server().init();
+
+  $('#chat-clear').click(function() {
+    $('#chat-input').val('');
+  });
 
   $('#chat-submit').click(function() {
-    var name    = $('#person-name').val();
     var message = $('#chat-input').val();
+    var name    = $('#person-name').val();
+    if (message == '' || name == '') {
+      alert('Must enter a name and message.');
+      return false;
+    }
     new Person(name).say(message);
-    return false;
   });
 
   $('#refresh-chat').click(function() {
-    new Server().poll();
+    server.poll();
   });
 }); // $(document).ready()
