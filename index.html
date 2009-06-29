@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -27,13 +28,21 @@
 
       h1 .small { font-size: 0.4em; }
 
-      h1 a { text-decoration: none }
+      h1 a {}
 
       h2 { font-size: 1.5em; color: #111111; }
 
       h3 { text-align: center; color: #111111; }
 
-      a { color: #111111; }
+      a {
+        color: #111111;
+        border-bottom: 2px dashed #777;
+        text-decoration: none;
+      }
+
+      a:hover {
+        border-bottom: 2px solid #777;
+      }
 
       .description {
         font-size: 1.2em;
@@ -42,7 +51,14 @@
         font-style: italic;
       }
 
-      .download { float: right; }
+      .download {
+        float: right;
+      }
+
+      .download a {
+        border: none;
+      }
+
       pre { background: #000; color: #fff; padding: 15px;}
 
       hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
@@ -79,12 +95,41 @@
       <h2>Dependencies</h2>
       <p>
         HTML & Javascript
-        (The examples use jQuery, but it's not a requirement).
+        (The examples use <a href="http://jquery.com/">jQuery</a>, but it's not a requirement).
       </p>
 
       <h2>Install</h2>
       <p>
         Include <code>js-chat.js</code> in your layout, then take a look at the examples.
+      </p>
+
+      <h2>Examples</h2>
+      <p>
+        One attempt of the examples is to provide a global <code>server</code>
+        instance, which communicates with whatever means you're using to store the chat messages.
+        Code examples can be found in the <code>examples/</code> directory.
+      </p>
+
+      <p>
+        <h3>Plain HTML</h3>
+        <p>Throw this in <code>&lt;head&gt;</code></p>
+<pre>
+&lt;head&gt;
+  &lt;script type="text/javascript"&gt;
+    var server = new Server().init();
+  &lt;/script&gt;
+&lt;/head&gt;
+</pre>
+
+        <h3>jQuery</h3>
+        <p>Include this in the <code>.ready()</code> method somewhere in your Javascript.</p>
+<pre>
+$(document).ready(function() {
+  var server = new Server().init();
+  // ...other jQuery shit...
+});
+</pre>
+
       </p>
 
       <h2>Authors</h2>
@@ -106,7 +151,7 @@
       </p>
 
       <div class="footer">
-        get the source code on GitHub : <a href="http://github.com/Oshuma/js-chat">Oshuma/js-chat</a>
+        get open sores at GitHub : <a href="http://github.com/Oshuma/js-chat">Oshuma/js-chat</a>
       </div>
 
     </div>
