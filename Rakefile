@@ -15,7 +15,7 @@ namespace :doc do
     opts << "--project-name js-chat"
     opts << "--directory " + File.join(DOCROOT, 'api')
     files = %w{
-      public/javascript/js-chat.js
+      js-chat.js
     }
     sh "jsdoc.pl #{opts.join(' ')} #{files.join(' ')}"
   end

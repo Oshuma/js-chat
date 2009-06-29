@@ -5,6 +5,7 @@
  * @param {String} name The person's name.
  * @param {Server} server The server this person will communicate with.
  * @return A new person.
+ * @type Person
  */
 function Person(name, server) {
   this.name   = name;
@@ -17,7 +18,7 @@ function Person(name, server) {
  *
  * @member Person
  * @param {String} message The message to send to the server.
- * @returns Person
+ * @type Person
  */
 Person.prototype.say = function(message) {
   this.server.send(this, message);
@@ -26,17 +27,24 @@ Person.prototype.say = function(message) {
 
 
 /**
+ * Holds the default Server options.
+ */
+Server.defaults = {
+  interval: 5000,
+};
+
+/**
  * Server contructor.
  *
  * @constructor
- * @param {Integer} interval The number of milliseconds in which to poll the server.
+ * @param {Object} options An options hash to customize the server.
+ * @see Server#defaults
  * @return A server instance.
+ * @type Server
  */
-function Server(interval) {
+function Server(options) {
   this.initialized = false;
-
-  // Default interval is 5 seconds (5000ms).
-  this.interval = (typeof(interval) == 'undefined' ? 5000 : interval);
+  if (typeof(options) == 'undefined') this.options = Server.defaults;
 }
 
 
@@ -47,12 +55,13 @@ function Server(interval) {
  * @member Server
  * @param {Boolean} initialPoll If true, the server is polled immediately when initializing.
  * @returns Server instance.
+ * @type Server
  */
 Server.prototype.init = function( initialPoll ) {
   if (this.initialized) return;
 
   if (initialPoll) this.poll();
-  setInterval(this.poll, this.interval);
+  setInterval(this.poll, this.options.interval);
 
   this.initialized = true;
   return this;
@@ -66,6 +75,7 @@ Server.prototype.init = function( initialPoll ) {
  * @param {Person} person The person who's sending the message.
  * @param {String} message The message body.
  * @returns True if success, false otherwise.
+ * @type Boolean
  */
 Server.prototype.send = function(person, message) {
   // TODO: Replace this with the server POST which stores the message.
@@ -84,6 +94,7 @@ Server.prototype.send = function(person, message) {
  *
  * @member Server
  * @returns Server instance.
+ * @type Server
  */
 Server.prototype.poll = function() {
   // TODO: Replace this with the code that polls the server.
