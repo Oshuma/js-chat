@@ -3,11 +3,14 @@
  *
  * @constructor
  * @param {String} name The person's name.
+ * @param {Server} server The server this person will communicate with.
  * @return A new person.
  */
-function Person(name) {
-  this.name = name;
+function Person(name, server) {
+  this.name   = name;
+  this.server = server;
 }
+
 
 /**
  * Sends a message to the server.
@@ -17,16 +20,7 @@ function Person(name) {
  * @returns Person
  */
 Person.prototype.say = function(message) {
-  // TODO: Replace this with the server POST which stores the message.
-  if (typeof(jQuery) == 'undefined') return;
-  $('#chat-log').append(this.name + ': ' + message + '\n');
-  // $.Ajax({
-  //   type: 'POST',
-  //   url: '/messages',
-  //   data: {'name': name, 'message': message},
-  //   success: function() {},
-  //   error:   function() {},
-  // });
+  this.server.send(this, message);
   return this;
 }
 
@@ -45,6 +39,7 @@ function Server(interval) {
   this.interval = (typeof(interval) == 'undefined' ? 5000 : interval);
 }
 
+
 /**
  * Sets up the Server (timers and misc. other options).
  * This should only be called once per Server instance.
@@ -62,6 +57,29 @@ Server.prototype.init = function( initialPoll ) {
   this.initialized = true;
   return this;
 };
+
+
+/**
+ * Sends a person's message to the server storage.
+ *
+ * @member Server
+ * @param {Person} person The person who's sending the message.
+ * @param {String} message The message body.
+ * @returns True if success, false otherwise.
+ */
+Server.prototype.send = function(person, message) {
+  // TODO: Replace this with the server POST which stores the message.
+  if (typeof(jQuery) == 'undefined') return;
+  $('#chat-log').append(person.name + ': ' + message + '\n');
+  // $.Ajax({
+  //   type: 'POST',
+  //   url: '/messages',
+  //   data: {'name': name, 'message': message},
+  //   success: function() {},
+  //   error:   function() {},
+  // });
+};
+
 
 /**
  * This method is called on an interval to poll the server for new messages.

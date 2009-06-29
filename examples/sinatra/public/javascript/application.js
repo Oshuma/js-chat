@@ -14,7 +14,7 @@ $(document).ready(function() {
       alert('Must enter a name and message.');
       return false;
     }
-    new Person(name).say(message);
+    new Person(name, server).say(message);
   });
 
   $('#refresh-chat').click(function() {
