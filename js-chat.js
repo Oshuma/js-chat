@@ -9,7 +9,6 @@ function Person(name) {
   this.name = name;
 }
 
-
 /**
  * Sends a message to the server.
  *
@@ -40,20 +39,27 @@ Person.prototype.say = function(message) {
  * @return A server instance.
  */
 function Server(interval) {
+  this.initialized = false;
+
   // Default interval is 5 seconds (5000ms).
   this.interval = (typeof(interval) == 'undefined' ? 5000 : interval);
 }
 
 /**
  * Sets up the Server (timers and misc. other options).
+ * This should only be called once per Server instance.
  *
  * @member Server
  * @param {Boolean} initialPoll If true, the server is polled immediately when initializing.
  * @returns Server instance.
  */
 Server.prototype.init = function( initialPoll ) {
+  if (this.initialized) return;
+
   if (initialPoll) this.poll();
   setInterval(this.poll, this.interval);
+
+  this.initialized = true;
   return this;
 };
 
