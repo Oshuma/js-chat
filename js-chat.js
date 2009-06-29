@@ -69,8 +69,6 @@ Server.prototype.init = function( initialPoll ) {
  */
 Server.prototype.send = function(person, message) {
   // TODO: Replace this with the server POST which stores the message.
-  if (typeof(jQuery) == 'undefined') return;
-  $('#chat-log').append(person.name + ': ' + message + '\n');
   // $.Ajax({
   //   type: 'POST',
   //   url: '/messages',
@@ -89,11 +87,9 @@ Server.prototype.send = function(person, message) {
  */
 Server.prototype.poll = function() {
   // TODO: Replace this with the code that polls the server.
-  if (typeof(jQuery) == 'undefined') return;
-  $('#chat-log').append('Server polling for new messages...\n');
   // $.Ajax({
   //   type: 'GET',
-  //   url: '/json',
+  //   url: '/messages.json',
   //   success: function() {},
   //   error:   function() {},
   // });
