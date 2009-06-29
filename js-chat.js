@@ -31,13 +31,13 @@ Person.prototype.say = function(message) {
  *
  * @final
  * @type Object
- * @param {String} basePath The base URL path to the (RESTful) message resource.
+ * @param {String} resourcePath The base URL path to the (RESTful) message resource.
  * @param {String} format Data exchange format (json, xml, etc.).
  * @param {Boolean} initialPoll If true, the server is polled immediately when initializing.
  * @param {Integer} interval The number of milliseconds in which to poll the server.
  */
 Server.defaults = {
-  basePath: '/messages',
+  resourcePath: '/messages',
   format: 'json',
   initialPoll: false,
   interval: 5000,
@@ -74,6 +74,22 @@ Server.prototype.init = function() {
 
   this.initialized = true;
   return this;
+};
+
+
+/**
+ * Returns the full resource path, with optional format.
+ *
+ * @member Server
+ * @param {Boolean} format If true, will append the server option's format value.
+ * @see Server#defaults
+ * @returns The resource path.
+ * @type String
+ */
+Server.prototype.fullPath = function(format) {
+  var path = this.options.resourcePath;
+  if (format) path += '.' + this.options.format;
+  return path;
 };
 
 
