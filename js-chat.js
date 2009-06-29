@@ -31,10 +31,14 @@ Person.prototype.say = function(message) {
  *
  * @final
  * @type Object
+ * @param {String} basePath The base URL path to the (RESTful) message resource.
+ * @param {String} format Data exchange format (json, xml, etc.).
  * @param {Boolean} initialPoll If true, the server is polled immediately when initializing.
  * @param {Integer} interval The number of milliseconds in which to poll the server.
  */
 Server.defaults = {
+  basePath: '/messages',
+  format: 'json',
   initialPoll: false,
   interval: 5000,
 };
@@ -63,7 +67,7 @@ function Server(options) {
  * @type Server
  */
 Server.prototype.init = function() {
-  if (this.initialized) return;
+  if (this.initialized) return this;
 
   if (this.options.initialPoll) this.poll();
   setInterval(this.poll, this.options.interval);
@@ -83,7 +87,7 @@ Server.prototype.init = function() {
  * @type Boolean
  */
 Server.prototype.send = function(person, message) {
-  // TODO: Replace this with the server POST which stores the message.
+  // TODO: Replace this with your server POST which stores the message.
   // $.Ajax({
   //   type: 'POST',
   //   url: '/messages',
@@ -102,7 +106,7 @@ Server.prototype.send = function(person, message) {
  * @type Server
  */
 Server.prototype.poll = function() {
-  // TODO: Replace this with the code that polls the server.
+  // TODO: Replace this with your code that polls the server.
   // $.Ajax({
   //   type: 'GET',
   //   url: '/messages.json',
