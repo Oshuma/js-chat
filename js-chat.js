@@ -38,7 +38,6 @@ Person.prototype.say = function(message) {
  */
 Server.defaults = {
   resourcePath: '/messages',
-  format: 'json',
   initialPoll: false,
   interval: 5000,
 };
@@ -78,23 +77,11 @@ Server.prototype.init = function() {
 
 
 /**
- * Returns the full resource path, with optional format.
- *
- * @member Server
- * @param {Boolean} format If true, will append the server option's format value.
- * @see Server#defaults
- * @returns The resource path.
- * @type String
- */
-Server.prototype.fullPath = function(format) {
-  var path = this.options.resourcePath;
-  if (format) path += '.' + this.options.format;
-  return path;
-};
-
-
-/**
  * Sends a person's message to the server storage.
+ *
+ * This is the method that you want to overload on your server
+ * instance to send a message to a server.  It must accept two
+ * parameters, the Person instance and the message (string).
  *
  * @member Server
  * @param {Person} person The person who's sending the message.
@@ -103,31 +90,19 @@ Server.prototype.fullPath = function(format) {
  * @type Boolean
  */
 Server.prototype.send = function(person, message) {
-  // TODO: Replace this with your server POST which stores the message.
-  // $.Ajax({
-  //   type: 'POST',
-  //   url: '/messages',
-  //   data: {'name': name, 'message': message},
-  //   success: function() {},
-  //   error:   function() {},
-  // });
+  return this;
 };
 
 
 /**
- * This method is called on an interval to poll the server for new messages.
+ * This polls the server for new messages at the server's interval option.
+ *
+ * Overload this method to customize where the data comes from and what happens to it.
  *
  * @member Server
  * @returns Server instance.
  * @type Server
  */
 Server.prototype.poll = function() {
-  // TODO: Replace this with your code that polls the server.
-  // $.Ajax({
-  //   type: 'GET',
-  //   url: '/messages.json',
-  //   success: function() {},
-  //   error:   function() {},
-  // });
   return this;
 };

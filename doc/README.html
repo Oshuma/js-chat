@@ -103,7 +103,6 @@
         Include <code>js-chat.js</code> in your layout, then take a look at the examples.
       </p>
 
-      <h2>Examples</h2>
       <p>
         One attempt of the examples is to provide a global <code>server</code>
         instance, which communicates with whatever means you're using to store the chat messages.
@@ -132,10 +131,34 @@ $(document).ready(function() {
 
       </p>
 
-      <h2>Authors</h2>
       <p>
-        Dale Campbell (oshuma@gmail.com)
+        Now that you have a <code>server</code> object, you must overload a few messages.  First,
+        the <code>server.send()</code> method.
+        This method takes two arguments; the <code>Person</code> object and the message (string).
+        What you do with the data after that, is up to you.
       </p>
+
+      <p>Here's a simple example, using <a href="http://jquery.com/">jQuery</a>.</p>
+<pre>
+server.send = function(person, message) {
+  $.Ajax({
+    type: 'POST',
+    url: '/messages',
+    data: {'person_name': person.name, 'message': message },
+    success: function() { // refresh message div }
+  });
+};
+</pre>
+
+      <p>
+        Another is the <code>server.poll()</code> method, which is set to fire at the
+        interval you set when creating the server (or from the defaults).
+      </p>
+<pre>
+server.poll = function() {
+  // Get the new messages and do something with them.
+};
+</pre>
 
       <h2>Download</h2>
       <p>
@@ -149,6 +172,12 @@ $(document).ready(function() {
         by running:
         <pre>$ git clone git://github.com/Oshuma/js-chat</pre>
       </p>
+
+      <h2>Author</h2>
+      <p>Dale Campbell - <a href="http://oshuma.github.com/">http://oshuma.github.com/</a></p>
+
+      <h2>License</h2>
+      <p><a href="http://sam.zoy.org/wtfpl/" title="WTFPL">WTFPL</a>, bitches.</p>
 
       <div class="footer">
         get open sores at GitHub : <a href="http://github.com/Oshuma/js-chat">Oshuma/js-chat</a>
