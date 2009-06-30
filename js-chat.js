@@ -33,12 +33,12 @@ Person.prototype.say = function(message) {
  * @type Object
  * @param {String} resourcePath The base URL path to the (RESTful) message resource.
  * @param {String} format Data exchange format (json, xml, etc.).
- * @param {Boolean} initialPoll If true, the server is polled immediately when initializing.
+ * @param {Boolean} initialPoll If true, the server is polled immediately when run.
  * @param {Integer} interval The number of milliseconds in which to poll the server.
  */
 Server.defaults = {
   resourcePath: '/messages',
-  initialPoll: false,
+  initialPoll: true,
   interval: 5000,
 };
 
@@ -65,7 +65,7 @@ function Server(options) {
  * @returns Server instance.
  * @type Server
  */
-Server.prototype.init = function() {
+Server.prototype.run = function() {
   if (this.initialized) return this;
 
   if (this.options.initialPoll) this.poll();
@@ -89,9 +89,7 @@ Server.prototype.init = function() {
  * @returns True if success, false otherwise.
  * @type Boolean
  */
-Server.prototype.send = function(person, message) {
-  return this;
-};
+// Server.prototype.send = function(person, message) {};
 
 
 /**
@@ -103,6 +101,4 @@ Server.prototype.send = function(person, message) {
  * @returns Server instance.
  * @type Server
  */
-Server.prototype.poll = function() {
-  return this;
-};
+// Server.prototype.poll = function() {};

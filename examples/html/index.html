@@ -5,12 +5,30 @@
     <script src="js-chat.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-      var server = new Server().init();
+      var server = new Server();
+
+      function serverSend(person, message) {
+        var chatLog = document.getElementById('chat-log');
+        chatLog.innerHTML += person.name + ': ' + message + '\n';
+      };
+
+      function serverPoll() {
+        var chatLog = document.getElementById('chat-log');
+        chatLog.innerHTML += 'Polling...\n';
+      };
+
+      server.send = serverSend;
+      server.poll = serverPoll;
+
+      server.run();
     </script>
     
   </head>
 
   <body>
     <h1>js-chat</h1>
+    <div id="chat-log">
+      Messages will show up here...
+    </div>
   </body>
 </html>
