@@ -1,34 +1,39 @@
 <html>
   <head>
-    <title>js-chat / chat-serv</title>
+    <title>js-chat</title>
 
+    <!-- js-chat library -->
     <script src="js-chat.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-      var server = new Server();
-
-      function serverSend(person, message) {
-        var chatLog = document.getElementById('chat-log');
-        chatLog.innerHTML += person.name + ': ' + message + '\n';
-      };
-
-      function serverPoll() {
-        var chatLog = document.getElementById('chat-log');
-        chatLog.innerHTML += 'Polling...\n';
-      };
-
-      server.send = serverSend;
-      server.poll = serverPoll;
-
-      server.run();
-    </script>
+    <!-- Example stuff. -->
+    <link href="application.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="application.js" type="text/javascript"></script>
     
   </head>
 
   <body>
     <h1>js-chat</h1>
-    <div id="chat-log">
-      Messages will show up here...
-    </div>
+
+      <div id="wrapper">
+        <div id="actions">
+          <form id="chat-form">
+            <div id="person">
+              <label for="person-name">Your Name:</label>
+              <input id="person-name" type="text" />
+            </div>
+
+            <textarea id="chat-log" disabled></textarea>
+
+            <label for="chat-input">Say:</label>
+            <input id="chat-input" type="text" />
+
+            <input id="chat-submit" type="submit" value="Send" />
+            <input id="chat-clear" type="reset" value="Clear" />
+            <input id="refresh-chat" type="submit" value="Refresh" />
+          </form>
+        </div>
+      </div>
+
+
   </body>
 </html>

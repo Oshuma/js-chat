@@ -1,14 +1,26 @@
-// The UI shit.
+// The jQuery shit.
 $(document).ready(function() {
-  var server = new Server().init();
+  // Create a new server instance.
+  var server = new Server();
 
   // Overload the send method to just append the person's name
   // and the message.
-  server.send = serverSend;
+  server.send = function(person, message) {
+    $('#chat-log').append(person.name + ': ' + message + '\n');
+  };
 
   // Overload the poll method to get any new messages from the server.
-  server.poll = serverPoll;
+  server.poll = function() {
+    $('#chat-log').append('Polling...\n');
+  };
 
+  // Now run the server.
+  server.run();
+
+
+  //
+  // The UI shit.
+  //
   $('#chat-clear').click(function() {
     $('#chat-input').val('');
   });
@@ -27,18 +39,3 @@ $(document).ready(function() {
     server.poll();
   });
 }); // $(document).ready()
-
-serverSend = function(person, message) {
-  // if (typeof(jQuery) == 'undefined') return;
-  // jQuery.Ajax({
-  //   type: 'POST',
-  //   url: '/messages',
-  //   success: function(response) { alert(response); },
-  //   error:   function(response) { alert(response); },
-  // });
-};
-
-serverPoll = function() {
-  // if (typeof(jQuery) == 'undefined') return;
-  // $.Ajax({});
-};
