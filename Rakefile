@@ -31,6 +31,7 @@ namespace :doc do
     sh "git checkout master"
 
     # Copy the files.
+    sh "cp #{File.join(ROOT, 'js-chat.js')} #{ROOT}/js-chat.js.gh"
     sh "cp #{File.join(DOCROOT, 'README.html')} #{ROOT}/index.html.gh"
     sh "cp -r #{File.join(ROOT, 'test')} test.gh"
     sh "cp -r #{File.join(ROOT, 'examples/html')} demo.gh"
