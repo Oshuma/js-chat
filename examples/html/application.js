@@ -9,14 +9,16 @@ window.onload = function() {
   var server = new Server();
 
   // Overload the send method to just append the person's name
-  // and the message.
+  // and the message to an element.
   server.send = function(person, message) {
     element('chat-log').innerHTML += person.name + ': ' + message + '\n';
+    // Store the message.
   };
 
   // Overload the poll method to get any new messages from the server.
   server.poll = function() {
     element('chat-log').innerHTML += 'Polling...\n';
+    // Get some messages and do something...
   };
 
   // Now run the server.

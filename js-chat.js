@@ -31,13 +31,11 @@ Person.prototype.say = function(message) {
  *
  * @final
  * @type Object
- * @param {String} resourcePath The base URL path to the (RESTful) message resource.
  * @param {String} format Data exchange format (json, xml, etc.).
  * @param {Boolean} initialPoll If true, the server is polled immediately when run.
  * @param {Integer} interval The number of milliseconds in which to poll the server.
  */
 Server.defaults = {
-  resourcePath: '/messages',
   initialPoll: true,
   interval: 5000,
 };
