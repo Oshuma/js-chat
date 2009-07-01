@@ -94,71 +94,139 @@
 
       <h2>Dependencies</h2>
       <p>
-        HTML & Javascript
-        (The examples use <a href="http://jquery.com/">jQuery</a>, but it's not a requirement).
+        HTML &amp; Javascript, bitches.
       </p>
 
       <h2>Install</h2>
       <p>
         Include <code>js-chat.js</code> in your layout, then take a look at the examples.
       </p>
+<pre>
+&lt;head&gt;
+  &lt;script src="/path/to/js-chat.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;/head&gt;
+</pre>
+
+      <p>
+        <h3>Options</h3>
+        <p>The server can be customized with a hash of options.</p>
+
+<pre>
+var options = { interval: 10000 };
+var server  = new Server(options);
+</pre>
+
+        <ul>
+          <li><code>initialPoll</code>: If true, the server is polled immediately when run.</li>
+          <li><code>interval</code>: The number of milliseconds in which to poll the server.</li>
+        </ul>
+      </p>
+
+      <h2>Examples</h2>
 
       <p>
         One attempt of the examples is to provide a global <code>server</code>
         instance, which communicates with whatever means you're using to store the chat messages.
-        Code examples can be found in the <code>examples/</code> directory.
+        Actual code can be found in the <code>examples/</code> directory.
       </p>
 
-      <p>
-        <h3>Plain HTML</h3>
-        <p>Throw this in <code>&lt;head&gt;</code></p>
 <pre>
+&lt;!-- Plain HTML/Javascript --&gt;
 &lt;head&gt;
   &lt;script type="text/javascript"&gt;
-    var server = new Server().init();
+    var server = new Server();
+    // Setup the server (see below).
+    server.run();
   &lt;/script&gt;
 &lt;/head&gt;
-</pre>
 
-        <h3>jQuery</h3>
-        <p>Include this in the <code>.ready()</code> method somewhere in your Javascript.</p>
-<pre>
+// jQuery
 $(document).ready(function() {
   var server = new Server().init();
-  // ...other jQuery shit...
+  // Setup the server (see below).
+  server.run();
+  // ...other jQuery shit.
 });
 </pre>
 
+
+      <p>
+        Now that you have a <code>server</code> object, you must overload a few
+        messages. After that, what you do with the data after that, is up to you.
       </p>
 
       <p>
-        Now that you have a <code>server</code> object, you must overload a few messages.  First,
-        the <code>server.send()</code> method.
-        This method takes two arguments; the <code>Person</code> object and the message (string).
-        What you do with the data after that, is up to you.
+        First, the <code>server.send()</code> method.
+        This method takes two arguments; the <code>Person</code> object and the
+        message (string).
+
+        The second is <code>server.poll()</code>, which is called on the <code>server</code>'s
+        interval to get new messages from the server (or anything, really).
       </p>
+
+
+      <h3>Plain Javascript</h3>
+<pre>
+// Shorthand helper.
+function element(id) {
+  return document.getElementById(id);
+}
+
+// This function will be called once the DOM is loaded.
+window.onload = function() {
+  // Create a new server instance.
+  var server = new Server();
+
+  // Overload the send method to just append the person's name
+  // and the message to an element.
+  server.send = function(person, message) {
+    element('chat-log').innerHTML += person.name + ': ' + message + '\n';
+    // Store the message.
+  };
+
+  // Overload the poll method to get any new messages from the server.
+  server.poll = function() {
+    element('chat-log').innerHTML += 'Polling...\n';
+    // Get some messages and do something...
+  };
+
+  // Now run the server.
+  server.run();
+
+  // ...other UI shit.
+  element('chat-submit').onclick = function() {
+    var message = element('chat-input').value;
+    var name    = element('person-name').value;
+    // Create a new Person; modify as needed.
+    // Here, we just send 'say' the message.
+    new Person(name, server).say(message);
+    return false;
+  }
+} // window.onload()
+</pre>
+
+      <h3>jQuery</h3>
 
       <p>Here's a simple example, using <a href="http://jquery.com/">jQuery</a>.</p>
 <pre>
-server.send = function(person, message) {
-  $.Ajax({
-    type: 'POST',
-    url: '/messages',
-    data: {'person_name': person.name, 'message': message },
-    success: function() { // refresh message div }
-  });
-};
+$(document).ready(function() {
+  server.send = function(person, message) {
+    $.Ajax({
+      type: 'POST',
+      url: '/messages',
+      data: {'person_name': person.name, 'message': message },
+      success: function() { // do something }
+    });
+  };
+}); // $(document).ready()
 </pre>
 
       <p>
-        Another is the <code>server.poll()</code> method, which is set to fire at the
-        interval you set when creating the server (or from the defaults).
+        You get the idea.  Basically <code>server.send()</code> and
+        <code>server.poll()</code> are open-ended and allow you to insert any
+        kind of functionality you need.
       </p>
-<pre>
-server.poll = function() {
-  // Get the new messages and do something with them.
-};
-</pre>
+
 
       <h2>Download</h2>
       <p>
