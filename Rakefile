@@ -27,9 +27,21 @@ namespace :doc do
 
   desc 'Update the Github page with the README'
   task :github do
-    sh "git checkout master"  # make sure we're on master
-    sh "cp #{File.join(DOCROOT, 'README.html')} #{ROOT}/gh-temp.html"
+    # Make sure we're on master.
+    sh "git checkout master"
+
+    # Copy the files.
+    sh "cp #{File.join(DOCROOT, 'README.html')} #{ROOT}/index.html.gh"
+    sh "cp -r #{File.join(ROOT, 'test')} test.gh"
+    sh "cp -r #{File.join(ROOT, 'examples/html')} demo.gh"
+
+    # Checkout gh-pages and move them into place.
     sh "git checkout gh-pages"
-    sh "mv gh-temp.html index.html"
+
+    Dir["#{ROOT}/*.gh"].each do |file|
+      replacement = File.join(ROOT, File.basename(file, '.gh'))
+      sh "rm -rf #{replacement}"
+      sh "mv #{file} #{replacement}"
+    end
   end
 end
