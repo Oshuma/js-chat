@@ -26,15 +26,16 @@ namespace :doc do
   end
 
   desc 'Update the Github page with the README'
-  task :github do
+  task :github => [ :doc ] do
     # Make sure we're on master.
     sh "git checkout master"
 
     # Copy the files.
     sh "cp #{File.join(ROOT, 'js-chat.js')} #{ROOT}/js-chat.js.gh"
     sh "cp #{File.join(DOCROOT, 'README.html')} #{ROOT}/index.html.gh"
-    sh "cp -r #{File.join(ROOT, 'test')} test.gh"
-    sh "cp -r #{File.join(ROOT, 'examples/html')} demo.gh"
+    sh "cp -r #{File.join(ROOT, 'test')} #{ROOT}/test.gh"
+    sh "cp -r #{File.join(ROOT, 'examples/html')} #{ROOT}/demo.gh"
+    sh "cp -r #{File.join(DOCROOT, 'api')} #{ROOT}/api.gh"
 
     # Checkout gh-pages and move them into place.
     sh "git checkout gh-pages"
