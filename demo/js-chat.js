@@ -1,4 +1,13 @@
 /**
+ * Main JsChat class.
+ * Holds misc. information.
+ */
+JsChat = {
+  version: '0.1.0',
+  site: 'http://oshuma.github.com/js-chat/',
+};
+
+/**
  * Person constructor.
  *
  * @constructor
