@@ -20,10 +20,57 @@
     <!-- Now the js-chat files. -->
     <script src="../js-chat.js"></script>
     <script src="spec/js-chat_spec.js"></script>
+
+    <!-- Just some bullshit to hide the spec output. -->
+    <script type="text/javascript">
+      function hideOutput() {
+        var output = document.getElementById('wrapper');
+        output.style.display = 'none';
+      }
+    </script>
+
+    <!-- Simple styles for the DOM test element. -->
+    <style type="text/css">
+      #wrapper * {
+        margin: 0;
+        padding: 0;
+      }
+      #wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 100;
+
+        background-color: #f4f2e4;
+        border: 2px dashed gray;
+        font-size: 0.8em;
+        padding: 5px;
+        width: 40%;
+      }
+      #wrapper h1 {
+        font-size: 20px;
+        float: right;
+      }
+      #wrapper a {
+        text-decoration: none;
+      }
+      #wrapper a:hover {
+        text-decoration: underline;
+      }
+      #dom_test {
+        width: 70%;
+      }
+    </style>
   </head>
 
   <body>
-    <div id="dom_test">
+    <div id="wrapper">
+      <h1>Spec Output</h1>
+      <!-- This is the element that's used in the specs. -->
+      <a href="#hide" id="hide_debug" onclick="; hideOutput(); return false;">
+        [ Hide ]
+      </a>
+      <div id="dom_test"></div>
     </div>
   </body>
 </html>

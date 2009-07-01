@@ -21,6 +21,13 @@ function element(id) {
   return document.getElementById(id);
 }
 
+// Helper to output a debug test message.
+function debug (message) {
+  if (!message) return;
+  var domTest = document.getElementById('dom_test');
+  domTest.innerHTML += ('<div class="debug">' + message + '</div>');
+}
+
 function createServer(options, poll, send) {
   // Set some defaults.
   if (typeof(options) == 'undefined') options = Server.defaults;

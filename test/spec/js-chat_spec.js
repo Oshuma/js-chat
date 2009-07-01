@@ -40,6 +40,10 @@ Screw.Unit(function() {
       server = new Server();
     });
 
+    it('should not be initialized yet', function() {
+      expect(server.initialized).to(equal, false);
+    });
+
     describe('options', function() {
       it('should have default values', function() {
         var options = server.options;
@@ -54,6 +58,25 @@ Screw.Unit(function() {
 
       it('should not have a send method, initially', function() {
         expect(server.send).to(equal, undefined);
+      });
+
+      it('should set the poll method', function() {
+        server.poll = function() { return 'poll'; };
+        expect(server.poll()).to(equal, 'poll');
+      });
+
+      it('should set the send method', function() {
+        server.send = function() { return 'send'; };
+        expect(server.send()).to(equal, 'send');
+      });
+
+      it('should be initialized after run() is called', function() {
+        // Define the required functions:
+        server.poll = function() {};
+        server.send = function() {};
+        // Now run and test.
+        server.run();
+        expect(server.initialized).to(equal, true);
       });
     }); // methods
 
