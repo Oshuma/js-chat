@@ -31,11 +31,11 @@ namespace :doc do
     sh "git checkout master"
 
     # Copy the files.
-    sh "cp #{File.join(ROOT, 'js-chat.js')} #{ROOT}/js-chat.js.gh"
-    sh "cp #{File.join(DOCROOT, 'README.html')} #{ROOT}/index.html.gh"
-    sh "cp -r #{File.join(ROOT, 'test')} #{ROOT}/test.gh"
-    sh "cp -r #{File.join(ROOT, 'examples/html')} #{ROOT}/demo.gh"
-    sh "cp -r #{File.join(DOCROOT, 'api')} #{ROOT}/api.gh"
+    sh "cp #{ROOT}/js-chat.js #{ROOT}/js-chat.js.gh"
+    sh "cp #{DOCROOT}/README.html #{ROOT}/index.html.gh"
+    sh "cp -r #{ROOT}/test/ #{ROOT}/test.gh"
+    sh "cp -r #{ROOT}/examples/html/ #{ROOT}/demo.gh"
+    sh "cp -r #{DOCROOT}/api/ #{ROOT}/api.gh"
 
     # Checkout gh-pages and move them into place.
     sh "git checkout gh-pages"
