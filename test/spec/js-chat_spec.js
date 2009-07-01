@@ -1,5 +1,11 @@
 Screw.Unit(function() {
 
+  describe('JsChat', function() {
+    it('should have a version string', function() {
+      expect(typeof(JsChat.version)).to(equal, 'string');
+    });
+  }); // JsChat
+
   describe('Person', function() {
 
     // Setup
