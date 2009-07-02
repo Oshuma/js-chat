@@ -40,13 +40,14 @@ Person.prototype.say = function(message) {
  *
  * @final
  * @type Object
- * @param {String} format Data exchange format (json, xml, etc.).
+ * @param {Boolean} constantPoll If true, the server constantly calls poll() at the set interval.
  * @param {Boolean} initialPoll If true, the server is polled immediately when run.
  * @param {Integer} interval The number of milliseconds in which to poll the server.
  */
 Server.defaults = {
+  constantPoll: true,
   initialPoll: true,
-  interval: 5000,
+  interval: 10000,
 };
 
 /**
@@ -75,8 +76,11 @@ function Server(options) {
 Server.prototype.run = function() {
   if (this.initialized) return this;
 
-  if (this.options.initialPoll) this.poll();
-  setInterval(this.poll, this.options.interval);
+  if (this.options.initialPoll)
+    this.poll();
+
+  if (this.options.constantPoll)
+    setInterval(this.poll, this.options.interval);
 
   this.initialized = true;
   return this;

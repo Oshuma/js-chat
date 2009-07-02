@@ -116,8 +116,15 @@ var server  = new Server(options);
 </pre>
 
         <ul>
-          <li><code>initialPoll</code>: If true, the server is polled immediately when run.</li>
-          <li><code>interval</code>: The number of milliseconds in which to poll the server.</li>
+          <li>
+            <code>constantPoll</code>: If true (default), the server constantly calls <code>server.poll()</code> at the set interval.
+          </li>
+          <li>
+            <code>initialPoll</code>: If true (default), the server is polled immediately when run.
+          </li>
+          <li>
+            <code>interval</code>: The number of milliseconds in which to poll the server; default 10000ms (10 seconds).
+          </li>
         </ul>
       </p>
 
