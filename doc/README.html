@@ -64,6 +64,28 @@
       hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 
       .footer { text-align:center; padding-top:30px; font-style: italic; }
+
+      #sidebar {
+        position: fixed;
+        top: 40px;
+        left: 0;
+        border: 3px dashed #888;
+        border-left: none;
+        font-size: 1.0em;
+        margin: 0;
+      }
+
+      #sidebar a {
+        border: none;
+        color: #888;
+        display: block;
+        padding: 5px;
+        text-decoration: none;
+      }
+
+      #sidebar a:hover {
+        background-color: #ccc;
+      }
     </style>
   </head>
 
@@ -71,6 +93,12 @@
     <a href="http://github.com/Oshuma/js-chat">
       <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
     </a>
+
+    <div id="sidebar">
+      <a href="http://oshuma.github.com/js-chat/api/" title="API documentation.">&rarr; API &rarr;</a>
+      <a href="http://oshuma.github.com/js-chat/demo/" title="A simple demo in pure HTML/Javascript.">&rarr; DEMO &rarr;</a>
+      <a href="http://oshuma.github.com/js-chat/test/suite.html" title="The test suite.">&rarr; TESTS &rarr;</a>
+    </div>
 
     <div id="container">
 
