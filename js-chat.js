@@ -3,7 +3,7 @@
  * Holds misc. information.
  */
 JsChat = {
-  version: '0.1.0',
+  version: '0.2.0',
   site: 'http://oshuma.github.com/js-chat/',
 };
 
@@ -43,11 +43,13 @@ Person.prototype.say = function(message) {
  * @param {Boolean} constantPoll If true, the server constantly calls poll() at the set interval.
  * @param {Boolean} initialPoll If true, the server is polled immediately when run.
  * @param {Integer} interval The number of milliseconds in which to poll the server.
+ * @param {Boolean} pollAfterSend If true, the server is polled after send() is called.
  */
 Server.defaults = {
   constantPoll: true,
   initialPoll: true,
   interval: 10000,
+  pollAfterSend: false,
 };
 
 /**
@@ -61,7 +63,17 @@ Server.defaults = {
  */
 function Server(options) {
   this.initialized = false;
-  if (typeof(options) == 'undefined') this.options = Server.defaults;
+  if (typeof(options) == 'undefined') {
+    // No options passed, just use the defaults.
+    this.options = Server.defaults;
+  } else {
+    // Merge the passed options with the defaults.
+    for (value in Server.defaults) {
+      if (typeof(options[value]) == 'undefined')
+        options[value] = Server.defaults[value];
+    }
+    this.options = options;
+  }
 }
 
 
@@ -81,6 +93,16 @@ Server.prototype.run = function() {
 
   if (this.options.constantPoll)
     setInterval(this.poll, this.options.interval);
+
+  if (this.options.pollAfterSend) {
+    var server = this;
+    originalSend = this.send;
+    wrappedSend  = function() {
+      originalSend();
+      server.poll();
+    };
+    wrappedSend();
+  }
 
   this.initialized = true;
   return this;

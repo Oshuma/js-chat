@@ -56,8 +56,27 @@ Screw.Unit(function() {
         expect(server.options).to(equal, Server.defaults);
       });
 
+      it('should properly merge the options', function() {
+        var defaults = Server.defaults;
+        var server = new Server({interval: 4200}); // different than the default
+        expect(server.options.initialPoll).to(equal, defaults.initialPoll);
+      });
+
       it('should default constantPoll to true', function() {
         expect(server.options.constantPoll).to(equal, true);
+      });
+
+      it('should default pollAfterSend to false', function() {
+        expect(server.options.pollAfterSend).to(equal, false);
+      });
+
+      it('should correctly wrap .send() with pollAfterSend option', function() {
+        var sendWrapped = false;
+        testServer = new Server({pollAfterSend: true});
+        testServer.send = function() { sendWrapped = true; };
+        testServer.poll = function() {};
+        testServer.run();
+        expect(sendWrapped).to(equal, true);
       });
     }); // options
 

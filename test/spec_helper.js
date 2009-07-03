@@ -22,7 +22,7 @@ function element(id) {
 }
 
 // Helper to output a debug test message.
-function debug (message) {
+function debug(message) {
   if (!message) return;
   var domTest = document.getElementById('dom_test');
   domTest.innerHTML += ('<div class="debug">' + message + '</div>');
