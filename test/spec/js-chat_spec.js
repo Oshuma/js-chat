@@ -55,6 +55,10 @@ Screw.Unit(function() {
         var options = server.options;
         expect(server.options).to(equal, Server.defaults);
       });
+
+      it('should default constantPoll to true', function() {
+        expect(server.options.constantPoll).to(equal, true);
+      });
     }); // options
 
     describe('methods', function() {
