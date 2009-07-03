@@ -6,12 +6,18 @@ $(document).ready(function() {
   // Overload the send method to just append the person's name
   // and the message.
   server.send = function(person, message) {
-    $('#chat-log').append(person.name + ': ' + message + '\n');
+    var messageData = $('#chat-form').serialize();
+    $.post('/messages', messageData, function() {
+      $('#chat-log').append('sent');
+      server.poll();
+    });
   };
 
   // Overload the poll method to get any new messages from the server.
   server.poll = function() {
-    $('#chat-log').append('Polling...\n');
+    $.get('/messages', function(messages) {
+      $('#chat-log').html(messages);
+    });
   };
 
   // Now run the server.

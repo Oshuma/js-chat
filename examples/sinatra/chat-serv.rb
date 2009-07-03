@@ -3,7 +3,6 @@
   rubygems
   sinatra
   erb
-  json
 ).each { |dependency| require dependency }
 
 # Basic example Message class.
@@ -19,11 +18,8 @@ class Message
     "#{name}: #{body}"
   end
 
-  def to_json
-    "{ 'name': '#{name}', 'body': '#{body}' }"
-  end
-
   class << self
+    # This is the 'database' that stores all the messages.
     def all
       @@messages ||= []
     end
@@ -47,12 +43,13 @@ get '/' do
 end
 
 # Returns the messages in JSON format.
-get '/json' do
-  Message.all.map { |m| m.to_json }.to_json
+get '/messages' do
+  Message.all.map { |message| message.to_s }.join("\n")
 end
 
 # Creates a new Message
 post '/messages' do
-  Message.all << Message.new(params['message'])
-  redirect '/'
+  message = Message.new(params['message'])
+  Message.all << message
+  message
 end
