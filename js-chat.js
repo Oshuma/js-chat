@@ -95,10 +95,11 @@ Server.prototype.run = function() {
     setInterval(this.poll, this.options.interval);
 
   if (this.options.pollAfterSend) {
+    var server = this;
     originalSend = this.send;
     wrappedSend  = function() {
       originalSend();
-      this.poll();
+      server.poll();
     };
     wrappedSend();
   }

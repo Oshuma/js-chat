@@ -70,13 +70,13 @@ Screw.Unit(function() {
         expect(server.options.pollAfterSend).to(equal, false);
       });
 
-      it('should correctly wrap .send()', function() {
-        debug('TODO: Finish this test.');
-        // server = new Server({pollAfterSend: true});
-        // server.send = function() { return 'original'; };
-        // server.poll = function() { return 'poll'; };
-        // server.run();
-        // expect(element('dom_test').innerHTML).to(have, sentMessage);
+      it('should correctly wrap .send() with pollAfterSend option', function() {
+        var sendWrapped = false;
+        testServer = new Server({pollAfterSend: true});
+        testServer.send = function() { sendWrapped = true; };
+        testServer.poll = function() {};
+        testServer.run();
+        expect(sendWrapped).to(equal, true);
       });
     }); // options
 
