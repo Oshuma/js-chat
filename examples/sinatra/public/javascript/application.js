@@ -1,5 +1,7 @@
 // The jQuery shit.
 $(document).ready(function() {
+  $('#version').html('v' + JsChat.version);
+
   // Create a new server instance.
   var server = new Server();
 
