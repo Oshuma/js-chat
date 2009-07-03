@@ -30,13 +30,13 @@ function debug(message) {
 
 function createServer(options, poll, send) {
   // Set some defaults.
-  if (typeof(options) == 'undefined') options = Server.defaults;
-  if (typeof(poll) == 'undefined') {
+  if (!options) options = Server.defaults;
+  if (!poll) {
     poll = function() {
       element('dom_test').innerHTML += 'Polling...\n';
     }
   }
-  if (typeof(server) == 'undefined') {
+  if (!server) {
     send = function(person, message) {
       theMessage = person.name + ': ' + message + '\n';
       element('dom_test').innerHTML += theMessage;

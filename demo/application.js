@@ -1,10 +1,12 @@
-// Shorthand helper.
+// Shorthand helper to grab an element by id.
 function element(id) {
   return document.getElementById(id);
 }
 
 // This function will be called once the DOM is loaded.
 window.onload = function() {
+  element('version').innerHTML = 'v' + JsChat.version;
+
   // 'Database' to store the messages; with a few test messages.
   var allMessages = [
     'Robot 1: Kill all humans.',

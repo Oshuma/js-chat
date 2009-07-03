@@ -3,7 +3,7 @@
  * Holds misc. information.
  */
 JsChat = {
-  version: '0.2.0',
+  version: '0.2.1',
   site: 'http://oshuma.github.com/js-chat/',
 };
 
@@ -63,13 +63,13 @@ Server.defaults = {
  */
 function Server(options) {
   this.initialized = false;
-  if (typeof(options) == 'undefined') {
+  if (!options) {
     // No options passed, just use the defaults.
     this.options = Server.defaults;
   } else {
     // Merge the passed options with the defaults.
     for (value in Server.defaults) {
-      if (typeof(options[value]) == 'undefined')
+      if (!options[value])
         options[value] = Server.defaults[value];
     }
     this.options = options;
