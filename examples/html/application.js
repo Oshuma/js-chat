@@ -21,7 +21,7 @@ window.onload = function() {
   // and the message to an element.
   server.send = function(person, message) {
     allMessages.push(person.name + ': ' + message);
-    server.poll();
+    server.poll(); // Not needed if the Server option 'pollAfterSend' is true.
   };
 
   // Overload the poll method to get any new messages from the server.
@@ -32,21 +32,29 @@ window.onload = function() {
   // Now run the server.
   server.run();
 
+
   //
   // UI shit.
   //
+
   element('chat-clear').onclick = function() {
     element('chat-input').value = null;
     return false;
   }
 
+  /**
+   * This handles posting a new message.
+   */
   element('chat-submit').onclick = function() {
+    // Get the person's name and message; bail if either are blank.
     var message = element('chat-input').value;
     var name    = element('person-name').value;
     if (message == '' || name == '') {
       alert('Must enter a name and message.');
       return false;
     }
+    // Here we create a new Person instance, passing the name
+    // and server instance; then we just call the say method.
     new Person(name, server).say(message);
     element('chat-input').value = null;
     return false;

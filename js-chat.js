@@ -3,7 +3,7 @@
  * Holds misc. information.
  */
 JsChat = {
-  version: '0.2.1',
+  version: '0.2.2',
   site: 'http://oshuma.github.com/js-chat/',
 };
 
@@ -25,7 +25,6 @@ function Person(name, server) {
 /**
  * Sends a message to the server.
  *
- * @member Person
  * @param {String} message The message to send to the server.
  * @type Person
  */
@@ -39,11 +38,11 @@ Person.prototype.say = function(message) {
  * Holds the default Server options.
  *
  * @final
- * @type Object
  * @param {Boolean} constantPoll If true, the server constantly calls poll() at the set interval.
  * @param {Boolean} initialPoll If true, the server is polled immediately when run.
  * @param {Integer} interval The number of milliseconds in which to poll the server.
  * @param {Boolean} pollAfterSend If true, the server is polled after send() is called.
+ * @type Object
  */
 Server.defaults = {
   constantPoll: true,
@@ -81,7 +80,6 @@ function Server(options) {
  * Sets up the Server (timers and misc. other options).
  * This should only be called once per Server instance.
  *
- * @member Server
  * @returns Server instance.
  * @type Server
  */
@@ -116,7 +114,6 @@ Server.prototype.run = function() {
  * instance to send a message to a server.  It must accept two
  * parameters, the Person instance and the message (string).
  *
- * @member Server
  * @param {Person} person The person who's sending the message.
  * @param {String} message The message body.
  * @returns True if success, false otherwise.
@@ -130,7 +127,6 @@ Server.prototype.run = function() {
  *
  * Overload this method to customize where the data comes from and what happens to it.
  *
- * @member Server
  * @returns Server instance.
  * @type Server
  */
