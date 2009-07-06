@@ -48,6 +48,7 @@ window.onload = function() {
       return false;
     }
     new Person(name, server).say(message);
+    element('chat-input').value = null;
     return false;
   }
 
