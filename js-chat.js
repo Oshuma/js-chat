@@ -99,7 +99,7 @@ Server.prototype.run = function() {
       originalSend();
       server.poll();
     };
-    wrappedSend();
+    this.send = wrappedSend();
   }
 
   this.initialized = true;
